@@ -1,0 +1,8 @@
+{
+  "name": "SteakHouse",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "855420c3"
+}
