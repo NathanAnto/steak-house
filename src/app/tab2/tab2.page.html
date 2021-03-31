@@ -13,5 +13,12 @@
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Steaks page"></app-explore-container>
+  <ion-list *ngIf="steaks.length > 0">
+    <ion-item *ngFor="let steak of steaks">
+      <ion-label>{{ steak.name }}</ion-label>
+      <ion-icon name="cart-outline" class="clickable-icon" color="primary" (click)="addSteak(steak)"></ion-icon>
+    </ion-item>
+
+  </ion-list>
+
 </ion-content>

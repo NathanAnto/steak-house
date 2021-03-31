@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Steak } from './steak';
+import { SteakService } from './steak.service';
 
 @Component({
   selector: 'app-root',

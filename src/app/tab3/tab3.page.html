@@ -13,5 +13,11 @@
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Steaks in Cart"></app-explore-container>
+  <ion-list *ngIf="steaksInCart.length > 0">
+    <ion-item *ngFor="let steak of steaksInCart; let i = index">
+      <ion-label>{{ steak?.name }}</ion-label>
+      <ion-icon name="trash-outline" class="clickable-icon" color="primary" (click)="removeSteak(i)"></ion-icon>
+    </ion-item>
+  </ion-list>
+
 </ion-content>
