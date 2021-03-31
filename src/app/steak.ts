@@ -4,8 +4,3 @@ export interface Steak {
     cooking: string;
     price: number;
 }
-
-/*
-    let res = 'Cooking ' + this.name + ' as ' + cooking;      
-    console.log(res);
-*/

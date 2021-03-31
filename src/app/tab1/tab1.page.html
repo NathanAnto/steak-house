@@ -13,16 +13,19 @@
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Create steak"></app-explore-container>
-  <!-- <form #newSteak="ngForm" (ngSubmit)="createSteak(newSteak)">
+  <form [formGroup]="steakForm" (submit)="createSteak()">
     <ion-item>
       <ion-label>Steak</ion-label>
-      <ion-input type="text" [(ngModel)]="steak.name" name="name"></ion-input>
+      <ion-input type="text" formControlName="name"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Cooking</ion-label>
-      <ion-textarea [(ngModel)]="steak.cooking" name="cooking"></ion-textarea>
+      <ion-input type="text" formControlName="cooking"></ion-input>
     </ion-item>
-    <button ion-button type="submit" block>Create Steak</button>
-  </form> -->
+    <ion-item>
+      <ion-label>Price</ion-label>
+      <ion-input type="text" formControlName="price"></ion-input>
+    </ion-item>
+    <button ion-button type="submit" [disabled]="!steakForm.valid">Add Steak</button>
+  </form>
 </ion-content>

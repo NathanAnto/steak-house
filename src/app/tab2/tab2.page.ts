@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AlertController } from '@ionic/angular';
 import { CartService } from '../cart.service';
 import { Steak } from '../steak';
 import { SteakService } from '../steak.service';
@@ -12,7 +13,7 @@ export class Tab2Page {
 
   steaks: Steak[] = [];
   
-  constructor(private steakService: SteakService, private cartService: CartService) {}
+  constructor(private steakService: SteakService, private cartService: CartService, public alertController: AlertController) {}
 
   ngOnInit() {
     this.getSteaks();
@@ -22,7 +23,30 @@ export class Tab2Page {
     this.steakService.getSteaks().subscribe(steaks => this.steaks = steaks);
   }
 
-  addSteak(steak: Steak): void {
-    this.cartService.addSteaks(steak);
+  async addSteak(steak: Steak) {
+
+    // message box to confirm
+    const alert = await this.alertController.create({
+      header: "Steak added !",
+      message: 'The ' + steak.name + ' has succefully been added to your cart.',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Ok',
+          handler: () => {
+            // add steak to cart
+            this.cartService.addSteaks(steak);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 }

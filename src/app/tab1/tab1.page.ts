@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Steak } from '../steak';
 import { SteakService } from '../steak.service';
 
@@ -8,16 +8,38 @@ import { SteakService } from '../steak.service';
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss']
 })
-export class Tab1Page {
-  
-  steaks: Array<Steak>;
-  newSteak: Steak;
+export class Tab1Page implements OnInit{
 
-  constructor(steakService: SteakService) {
-    
+  steaks: Steak[];
+  steakForm: FormGroup;
+  newSteak: Steak = {
+    id: 0,
+    name: "",
+    cooking: "",
+    price : 0
+  };
+
+  constructor(private steakService: SteakService, private _fb: FormBuilder) {}
+  ngOnInit(): void {    
+    this.steakForm = this._fb.group({
+    name: ['', Validators.required],
+    cooking: [''],
+    price: ['', Validators.required]
+  });
   }
 
-  createSteak(newSteak: NgForm) {
-    this.newSteak = newSteak.value;
+  createSteak() {
+    // get form input
+    this.newSteak = this.steakForm.value;
+
+    // get steaks
+    this.steakService.getSteaks().subscribe(steaks => this.steaks = steaks);
+  
+    // make new steak id the length of the array
+    this.newSteak.id = this.steaks.length+1;
+    console.log(this.newSteak)
+
+    // add to the array
+    this.steakService.addSteak(this.newSteak);
   }
 }
