@@ -13,19 +13,25 @@
     </ion-toolbar>
   </ion-header>
 
-  <form [formGroup]="steakForm" (submit)="createSteak()">
+  <form [formGroup]="steakForm" (submit)="createSteak(steak)">
     <ion-item>
-      <ion-label>Steak</ion-label>
+      <ion-label position="floating">Steak</ion-label>
       <ion-input type="text" formControlName="name"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Cooking</ion-label>
-      <ion-input type="text" formControlName="cooking"></ion-input>
+      <ion-label position="floating">Cooking</ion-label>
+      <ion-select formControlName="cooking" value="Rare">
+        <ion-select-option value="Rare">Rare</ion-select-option>
+        <ion-select-option value="Medium Rare">Medium Rare</ion-select-option>
+        <ion-select-option value="Medium">Medium</ion-select-option>
+        <ion-select-option value="Medium Well">Medium well</ion-select-option>
+        <ion-select-option value="Well Done">Well Done</ion-select-option>
+      </ion-select>
     </ion-item>
     <ion-item>
-      <ion-label>Price</ion-label>
+      <ion-label position="floating">Price</ion-label>
       <ion-input type="text" formControlName="price"></ion-input>
     </ion-item>
-    <button ion-button type="submit" [disabled]="!steakForm.valid">Add Steak</button>
+    <ion-button type="submit" color="primary" [disabled]="!steakForm.valid">Add Steak</ion-button>
   </form>
 </ion-content>
